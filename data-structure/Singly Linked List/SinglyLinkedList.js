@@ -68,7 +68,25 @@ class SinglyLinkedList {
     }
     return this;
   }
+
+  // Get: Retrieving a node by it’s position in the Linked List!
+  get(index) {
+    if (index < 0 || index >= this.length) return null;
+    let current = this.head;
+    let counter = 0;
+    while (counter < index) {
+      current = current.next;
+      counter++;
+    }
+    return current;
+  }
+  // Set: Changing the value of a node based on it’s position in the Linked List
+  set(index, val) {
+    const foundNode = this.get(index);
+    if (!foundNode) return false;
+    foundNode.val = val;
+    return true;
+  }
 }
 
 const list = new SinglyLinkedList();
-console.log(list);
