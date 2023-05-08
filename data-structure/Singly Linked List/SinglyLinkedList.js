@@ -110,6 +110,40 @@ class SinglyLinkedList {
     this.length--;
     return removedNode;
   }
+
+  // Reverse: Reversing the Linked List in place!
+  print() {
+    // 단순히 reverse가 잘 됐는지 확인하기 위한 메소드
+    const arr = [];
+    let current = this.head;
+    while (current) {
+      arr.push(current.val);
+      current = current.next;
+    }
+    console.log(arr);
+  }
+  reverse() {
+    // node: 현재 노드, next: 그 다음 노드, prev: 연결하려는 노드의 앞 노드
+    let node = this.head;
+    this.head = this.tail;
+    this.tail = node;
+    let next;
+    let prev = null; // tail의 next가 null이기 때문
+    for (let i = 0; i < this.length; i++) {
+      next = node.next; // 27
+      node.next = prev; // null
+      prev = node;
+      node = next;
+    }
+    return this;
+  }
 }
 
 const list = new SinglyLinkedList();
+list.push("hi");
+list.push("hello");
+list.push("hallo");
+list.push("chao");
+list.print();
+list.reverse();
+list.print();
