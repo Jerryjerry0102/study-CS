@@ -6,7 +6,7 @@ class Node {
 }
 
 class SinglyLinkedList {
-  constsructor() {
+  constructor() {
     this.head = null;
     this.tail = null;
     this.length = 0;
@@ -17,12 +17,11 @@ class SinglyLinkedList {
     if (!this.head) {
       this.head = newNode;
       this.tail = this.head;
-      this.length = 1;
     } else {
       this.tail.next = newNode;
       this.tail = newNode;
-      this.length += 1;
     }
+    this.length++;
     return this;
   }
   // Popping: Removing a node from the end of the Linked List!
@@ -36,7 +35,7 @@ class SinglyLinkedList {
     }
     prev.next = null;
     this.tail = prev;
-    this.length -= 1;
+    this.length--;
     if (this.length === 0) {
       this.head = null;
       this.tail = null;
@@ -48,7 +47,7 @@ class SinglyLinkedList {
     if (!this.head) return undefined;
     const current = this.head;
     this.head = current.next;
-    this.length -= 1;
+    this.length--;
     if (this.length === 0) {
       this.tail = null;
     }
@@ -60,12 +59,11 @@ class SinglyLinkedList {
     if (!this.head) {
       this.head = newNode;
       this.tail = this.head;
-      this.length = 1;
     } else {
       newNode.next = this.head;
       this.head = newNode;
-      this.length += 1;
     }
+    this.length++;
     return this;
   }
 
@@ -86,6 +84,31 @@ class SinglyLinkedList {
     if (!foundNode) return false;
     foundNode.val = val;
     return true;
+  }
+  // Insert: Adding a node to the Linked List at a specific position
+  insert(index, val) {
+    if (index < 0 || index > this.length) return false;
+    if (index === this.length) this.push(val);
+    else if (index === 0) this.unshift(val);
+    else {
+      const newNode = new Node(val);
+      const foundNode = this.get(index - 1);
+      newNode.next = foundNode.next;
+      foundNode.next = newNode;
+      this.length++;
+    }
+    return true;
+  }
+  // Remove: Removing a node from the Linked List at a specific position
+  remove(index) {
+    if (index < 0 || index >= this.length) return undefined;
+    if (index === this.length - 1) return this.pop();
+    if (index === 0) return this.shift();
+    const prevNode = this.get(index - 1);
+    const removedNode = prevNode.next;
+    prevNode.next = removedNode.next;
+    this.length--;
+    return removedNode;
   }
 }
 
