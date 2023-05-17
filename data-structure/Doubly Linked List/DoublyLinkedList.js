@@ -101,6 +101,38 @@ class DoublyLinkedList {
     }
     return false;
   }
+  // Insert: Adding a node in a Doubly Linked List by a certain position
+  insert(idx, val) {
+    if (idx < 0 || idx > this.length) return false;
+    if (idx === 0) this.unshift(val);
+    else if (idx === this.length) this.push(val);
+    else {
+      const newNode = new Node(val);
+      const beforeNode = this.get(idx - 1);
+      const afterNode = beforeNode.next;
+      newNode.next = afterNode;
+      afterNode.prev = newNode;
+      newNode.prev = beforeNode;
+      beforeNode.next = newNode;
+      this.length++;
+    }
+    return true;
+  }
+  // Remove: Removing a node in a Doubly Linked List by a certain position
+  remove(idx) {
+    if (idx < 0 || idx >= this.length) return undefined;
+    if (idx === 0) return this.shift();
+    if (idx === this.length - 1) return this.pop();
+    const removedNode = this.get(idx);
+    const beforeNode = removedNode.prev;
+    const afterNode = removedNode.next;
+    beforeNode.next = afterNode;
+    afterNode.prev = beforeNode;
+    removedNode.next = null;
+    removedNode.prev = null;
+    this.length--;
+    return removedNode;
+  }
 }
 
 const list = new DoublyLinkedList();
