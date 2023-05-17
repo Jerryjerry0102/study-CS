@@ -70,6 +70,37 @@ class DoublyLinkedList {
     this.length++;
     return this;
   }
+  // Get: Accessing a node in a Doubly Linked List by its position
+  get(idx) {
+    if (idx < 0 || idx >= this.length) return null;
+    let count, current;
+    if (idx < Math.floor(this.length / 2)) {
+      count = 0;
+      current = this.head;
+      while (count !== idx) {
+        current = current.next;
+        count++;
+      }
+      return current;
+    } else {
+      count = this.length - 1;
+      current = this.tail;
+      while (count !== idx) {
+        current = current.prev;
+        count--;
+      }
+    }
+    return current;
+  }
+  // Set: Replacing the value of a node to the in a Doubly Linked List
+  set(idx, val) {
+    const foundNode = this.get(idx);
+    if (foundNode !== null) {
+      foundNode.val = val;
+      return true;
+    }
+    return false;
+  }
 }
 
 const list = new DoublyLinkedList();
