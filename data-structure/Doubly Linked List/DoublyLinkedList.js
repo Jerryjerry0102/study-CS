@@ -1,8 +1,8 @@
 class Node {
   constructor(val) {
     this.val = val;
+    this.prev = null; // Singly Linked List와 유일한 차이
     this.next = null;
-    this.prev = null; // 유일한 차이
   }
 }
 
@@ -133,7 +133,37 @@ class DoublyLinkedList {
     this.length--;
     return removedNode;
   }
+  // Reverse: Reversing the Linked List in place!
+  print() {
+    // Print: 단순히 reverse가 잘 됐는지 확인하기 위한 메소드
+    const arr = [];
+    let current = this.head;
+    while (current) {
+      arr.push(current.val);
+      current = current.next;
+    }
+    console.log(arr);
+  }
+  reverse() {
+    // 강의 없이 혼자 한 거라 완벽한지는 모르겠음
+    // current: 현재 노드, temp: 그 다음 노드
+    let current = this.head;
+    const tail = this.head;
+    for (let i = 0; i < this.length; i++) {
+      const temp = current.next;
+      current.next = current.prev;
+      current.prev = temp;
+      current = temp;
+    }
+    this.head = this.tail;
+    this.tail = tail;
+    return this;
+  }
 }
 
 const list = new DoublyLinkedList();
+list.push(0).push(1).push(2).push(3);
+list.print();
+list.reverse();
+list.print();
 console.log(list);
