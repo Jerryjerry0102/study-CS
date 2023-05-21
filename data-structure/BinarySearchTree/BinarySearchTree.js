@@ -41,6 +41,10 @@ class BinarySearchTree {
     }
     return false;
   }
+
+  // Tree Traversal
+  BFS() {}
+  DFS() {}
 }
 
 const tree = new BinarySearchTree();
