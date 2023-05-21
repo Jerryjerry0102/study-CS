@@ -43,7 +43,18 @@ class BinarySearchTree {
   }
 
   // Tree Traversal
-  BFS() {}
+  BFS() {
+    const queue = [];
+    const datas = [];
+    queue.push(this.root);
+    while (queue.length !== 0) {
+      const dequeuedNode = queue.shift();
+      datas.push(dequeuedNode.val);
+      if (dequeuedNode.left) queue.push(dequeuedNode.left);
+      if (dequeuedNode.right) queue.push(dequeuedNode.right);
+    }
+    return datas;
+  }
   DFS() {}
 }
 
